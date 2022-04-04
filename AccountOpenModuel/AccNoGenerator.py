@@ -9,6 +9,6 @@ class AccNoGenerator:
 
     def accNoGenerator(self,obj):
 
-        self.__acc_no = str(obj.get_cust_mobile())[0:3]+str(obj.get_cust_aadhar())[0:3]+str(obj.get_cust_pan())[0:3]
+        self.__acc_no = str(obj.get_cust_mobile())+str(obj.get_cust_aadhar())+str(obj.get_cust_pan())
 
         return self.__acc_no
