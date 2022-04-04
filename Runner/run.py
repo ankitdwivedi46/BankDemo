@@ -16,10 +16,12 @@ while(1):
     print()
 
     print(" 1. Account Opening")
-    print(" 2. Money Withdrawl")
-    print(" 3. Account Update")
-    print(" 4. Money Transfer")
-    print(" 5. Account Close")
+    print(" 2. Money Deposit")
+    print(" 3. Money Withdrawl")
+    print(" 4. Account Update")
+    print(" 5. Money Transfer")
+    print(" 6. Account Close")
+    print(" 7. Exit Bank App")
 
     print("================================================================================================")
 
@@ -30,6 +32,9 @@ while(1):
         openAcc = RunOpenAccount()
         obj = openAcc.fetchUserDetail()
         openAcc.insertUserDetailDB(obj)
+    elif( var == "7" ):
+
+        break
 
 
     
