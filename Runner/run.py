@@ -1,4 +1,5 @@
 from AccountOpenModuel.RunOpenAccount import RunOpenAccount
+from UserNamePasswordPINModuel.RunGenerateCreds import RunGenerateCreds
 import os
 
 
@@ -16,12 +17,13 @@ while(1):
     print()
 
     print(" 1. Account Opening")
-    print(" 2. Money Deposit")
-    print(" 3. Money Withdrawl")
-    print(" 4. Account Update")
-    print(" 5. Money Transfer")
-    print(" 6. Account Close")
-    print(" 7. Exit Bank App")
+    print(" 2. Generate UserName, Password and PIN")
+    print(" 3. Money Deposit")
+    print(" 4. Money Withdrawl")
+    print(" 5. Account Update")
+    print(" 6. Money Transfer")
+    print(" 7. Account Close")
+    print(" 8. Exit Bank App")
 
     print("================================================================================================")
 
@@ -32,7 +34,17 @@ while(1):
         openAcc = RunOpenAccount()
         obj = openAcc.fetchUserDetail()
         openAcc.insertUserDetailDB(obj)
-    elif( var == "7" ):
+        print("Congratulations your account has opened. Account No : '{}'\nPlease generate UserName, Password and PIN for Net Banking login and Money Movement".format(str(obj.get_cust_acc_no())))
+
+    elif( var == "2" ):
+
+        genCred = RunGenerateCreds()
+        obj1 = genCred.generateCreds()
+        genCred.insertUserCredDB(obj1)
+
+
+
+    elif( var == "8" ):
 
         break
 
