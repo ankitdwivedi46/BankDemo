@@ -1,5 +1,6 @@
 from AccountOpenModuel.RunOpenAccount import RunOpenAccount
 from UserNamePasswordPINModuel.RunGenerateCreds import RunGenerateCreds
+from AccountDepositModuel.RunMoneyDeposit import MoneyDeposit
 import os
 
 
@@ -42,6 +43,11 @@ while(1):
         obj1 = genCred.generateCreds()
         genCred.insertUserCredDB(obj1)
 
+    elif (var == "3"):
+
+        dep = MoneyDeposit()
+        dep.fetchMoneyDetailsFromUser()
+        dep.updateDepositMoneyInDB()
 
 
     elif( var == "8" ):
