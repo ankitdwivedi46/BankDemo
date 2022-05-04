@@ -10,10 +10,10 @@ class MoneyDeposit:
 
         cfObj = CommonFunctions()
 
-        cust_acc_no = input("Enter the account no in which you want to deposit the money: ").upper()
-        cfObj.validateCustomer(cust_acc_no)
+        self.cust_acc_no = input("Enter the account no in which you want to deposit the money: ").upper()
+        cfObj.validateCustomer(self.cust_acc_no)
 
-        amount = input("Enter the amount you want to deposit: ")
+        self.amount = input("Enter the amount you want to deposit: ")
 
 
 

@@ -11,7 +11,8 @@ class UpdateDBMoneyDeposit:
         conn = dbconn.connect_to_sql_server()
 
         SQL_QUERY = "SELECT CUSTOMER_BALANCE FROM CUSTOMER_ACCOUNT WHERE CUSTOMER_ACC_NO = '{}'".format(acc_no)
-
+        print(SQL_QUERY)
+        print(pd.read_sql_query(SQL_QUERY,conn))
         balance = pd.read_sql_query(SQL_QUERY,conn)['CUSTOMER_BALANCE'][0]
 
         new_bal = str((int(balance) + int(amount)))
@@ -23,7 +24,7 @@ class UpdateDBMoneyDeposit:
         cursor.execute(SQL_QUERY)
         conn.commit()
 
-        SQL_QUERY = "UPDATE CUSTOMER_BALANCE SET CUSTOMER_BALANCE = '{}' WHERE CUSTOMER_ACC_NO = '{}'".format(new_bal,acc_no)
+        SQL_QUERY = "UPDATE [CUSTOMER_ACCOUNT] SET CUSTOMER_BALANCE = '{}' WHERE CUSTOMER_ACC_NO = '{}'".format(new_bal,acc_no)
 
         cursor = conn.cursor()
         cursor.execute(SQL_QUERY)
