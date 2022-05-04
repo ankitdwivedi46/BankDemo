@@ -11,7 +11,7 @@ class RunGenerateCreds:
 
         cust_acc = input("Enter Your Account No: ")
         cfObj.validateCustomer(cust_acc)
-        cfObj.validateCustomerCred(cust_acc)
+        cfObj.validateCustomer(cust_acc)
         credObj.set_cust_acc_no(cust_acc)
 
         cust_username = input("Enter User Name: ")

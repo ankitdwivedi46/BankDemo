@@ -13,26 +13,29 @@ class CommonFunctions:
 
         conn.close()
 
-    def validateCustomerPIN(self,pin):
+    def validateCustomerPIN(self,username,pin):
 
         dbconn = DBConnections()
         conn = dbconn.connect_to_sql_server()
 
-        assert len(pd.read_sql_query("SELECT * FROM CUSTOMER_CREDENTIAL_DATABANK WHERE CUSTOMER_PIN='{}'".format(pin), conn)) == 0
+        assert (pd.read_sql_query("SELECT CUSTOMER_PIN FROM CUSTOMER_CREDENTIAL_DATABANK WHERE CUSTOMER_USERNAME='{}'".format(username), conn)['CUSTOMER_PIN'][0]) == pin
 
         conn.close()
 
-    def validateCustomerPassword(self,password):
+    def validateCustomerPassword(self,username,password):
 
         dbconn = DBConnections()
         conn = dbconn.connect_to_sql_server()
+
         from cryptography.fernet import Fernet
-        key = Fernet.generate_key()
+
+        key = pd.read_sql_query("SELECT DECRYPT_KEY FROM CUSTOMER_CREDENTIAL_DATABANK WHERE CUSTOMER_USERNAME='{}'".format(username), conn)['DECRYPT_KEY'][0].encode("utf-8")
+        pass_word = pd.read_sql_query("SELECT CUSTOMER_PASSWORD FROM CUSTOMER_CREDENTIAL_DATABANK WHERE CUSTOMER_USERNAME='{}'".format(username), conn)['CUSTOMER_PASSWORD'][0].encode("utf-8")
 
         cipher_suite = Fernet(key)
-        ciphered_text = cipher_suite.decrypt(bytes(password, "utf-8"))
+        ciphered_text = cipher_suite.decrypt(bytes(pass_word))
 
-        assert len(pd.read_sql_query("SELECT * FROM CUSTOMER_CREDENTIAL_DATABANK WHERE CUSTOMER_PASSWORD='{}'".format(password), conn)) == 0
+        assert ciphered_text.decode("utf-8") == password
 
         conn.close()
 

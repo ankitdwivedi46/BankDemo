@@ -14,10 +14,10 @@ class MoneyWithdraw:
         choice = input("Want to login using PIN or Password: ")
         if(choice.upper() == "PIN"):
             self.pin = input("Enter the PIN").upper()
-            cfObj.validateCustomerPIN(self.pin)
+            cfObj.validateCustomerPIN(self.username,self.pin)
         elif(choice.upper()=="PASSWORD"):
             self.password = input("Enter the Password: ")
-            cfObj.validateCustomerPassword(self.password)
+            cfObj.validateCustomerPassword(self.username,self.password)
 
 
 
