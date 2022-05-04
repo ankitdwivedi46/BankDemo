@@ -1,6 +1,7 @@
 from AccountOpenModuel.RunOpenAccount import RunOpenAccount
 from UserNamePasswordPINModuel.RunGenerateCreds import RunGenerateCreds
 from AccountDepositModuel.RunMoneyDeposit import MoneyDeposit
+from MoneyWithdrawlModuel.RunMoneyWithdraw import MoneyWithdraw
 import os
 
 
@@ -48,6 +49,11 @@ while(1):
         dep = MoneyDeposit()
         dep.fetchMoneyDetailsFromUser()
         dep.updateDepositMoneyInDB()
+
+    elif (var == "4"):
+
+        withDraw = MoneyWithdraw()
+        withDraw.fetchDetailsFromUser()
 
 
     elif( var == "8" ):
