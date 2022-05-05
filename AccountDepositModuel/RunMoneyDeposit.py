@@ -3,8 +3,9 @@ from AccountDepositModuel.UpdateDBWithMoneyDepositData import UpdateDBMoneyDepos
 
 class MoneyDeposit:
 
-    cust_acc_no = ""
-    amount = ""
+    def __init__(self):
+        self.__cust_acc_no = ""
+        self.__amount = ""
 
     def fetchMoneyDetailsFromUser(self):
 
@@ -14,7 +15,6 @@ class MoneyDeposit:
         cfObj.validateCustomer(self.cust_acc_no)
 
         self.amount = input("Enter the amount you want to deposit: ")
-
 
 
     def updateDepositMoneyInDB(self):
