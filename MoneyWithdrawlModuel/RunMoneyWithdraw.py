@@ -28,7 +28,7 @@ class MoneyWithdraw:
         self.amount = input("Enter Amount to be Withdrawn: ")
         cfObj.validateCustomerBalance(self.acc_no,self.amount)
 
-        print("Enter the PIN again: ")
+        self.pin = input("Enter the PIN again: ")
         cfObj.validateCustomerPIN(self.username, self.pin)
 
         print("=============PLEASE COLLECT YOUR AMOUNT==============")

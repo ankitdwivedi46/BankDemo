@@ -48,10 +48,12 @@ class CommonFunctions:
 
         dbconn = DBConnections()
         conn = dbconn.connect_to_sql_server()
+        print("SELECT CUSTOMER_BALANCE FROM CUSTOMER_ACCOUNT WHERE CUSTOMER_ACC_NO='{}'".format(acc_no))
+        print(pd.read_sql_query("SELECT CUSTOMER_BALANCE FROM CUSTOMER_ACCOUNT WHERE CUSTOMER_ACC_NO='{}'".format(acc_no), conn)['CUSTOMER_BALANCE'][0])
 
         balance =  pd.read_sql_query("SELECT CUSTOMER_BALANCE FROM CUSTOMER_ACCOUNT WHERE CUSTOMER_ACC_NO='{}'".format(acc_no), conn)['CUSTOMER_BALANCE'][0]
 
-        assert balance>amount
+        assert int(balance)>int(amount)
 
         conn.close()
 
