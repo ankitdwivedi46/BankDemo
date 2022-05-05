@@ -1,12 +1,14 @@
 from Utility.CommonFunctions import CommonFunctions
+from MoneyWithdrawlModuel.DBUpdateAfterWithdrawl import DBUpdateAfterWithdrawl
 
 class MoneyWithdraw:
 
-    username = ""
-    password = ""
-    pin = ""
-    acc_no = ""
-    amount = ""
+    def __init__(self):
+        self.__username = ""
+        self.__password = ""
+        self.__pin = ""
+        self.__acc_no = ""
+        self.__amount = ""
 
     def fetchDetailsFromUser(self):
 
@@ -25,6 +27,16 @@ class MoneyWithdraw:
 
         self.amount = input("Enter Amount to be Withdrawn: ")
         cfObj.validateCustomerBalance(self.acc_no,self.amount)
+
+        print("Enter the PIN again: ")
+        cfObj.validateCustomerPIN(self.username, self.pin)
+
+        print("=============PLEASE COLLECT YOUR AMOUNT==============")
+
+    def updateDBAfterMoneyWithdraw(self):
+
+        obj = DBUpdateAfterWithdrawl()
+        obj.updateDBAfterWithdrawl(self.amount,self.acc_no)
 
 
 

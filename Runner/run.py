@@ -54,6 +54,7 @@ while(1):
 
         withDraw = MoneyWithdraw()
         withDraw.fetchDetailsFromUser()
+        withDraw.updateDBAfterMoneyWithdraw()
 
 
     elif( var == "8" ):
