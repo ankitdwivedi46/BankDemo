@@ -1,5 +1,6 @@
 import pyodbc
 import pandas as pd
+import pymysql
 
 '''
 Creator : Ankit Dwivedi
@@ -29,10 +30,17 @@ class DBConnections:
     '''
 
     def connect_to_sql_server(self):
-        conn = pyodbc.connect('DRIVER={' + self.__driver + '};'
-                              'Server=' + self.__server + ';'
-                              'Database=' + self.__database + ';'
-                              'Username=' + self.__username + ';'
-                              'Password=' + self.__password + ';'
-                              'Trusted_Connection=yes')
+        #conn = pyodbc.connect('DRIVER={' + self.__driver + '};'
+        #                      'Server=' + self.__server + ';'
+        #                      'Database=' + self.__database + ';'
+        #                      'Username=' + self.__username + ';'
+        #                      'Password=' + self.__password + ';'
+        #                      'Trusted_Connection=yes')
+
+
+
+        conn = pymysql.connect(user='root', password='ankitD1@1',
+                                      database='AnkitBank')
+
         return conn
+
