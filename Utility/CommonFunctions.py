@@ -1,6 +1,6 @@
 import pandas as pd
 
-from Utility.CustomExceptions import InvalidPINException
+
 from Utility.DBConnections import DBConnections
 
 class CommonFunctions:
@@ -16,20 +16,23 @@ class CommonFunctions:
 
     def validateCustomerPIN(self,username,pin):
 
-        try:
 
-            dbconn = DBConnections()
-            conn = dbconn.connect_to_sql_server()
 
-            acc_no = pd.read_sql_query("SELECT CUSTOMER_ACC_NO FROM CUSTOMER_CREDENTIAL_DATABANK WHERE CUSTOMER_USERNAME='{}'".format(username), conn)['CUSTOMER_ACC_NO'][0]
-            assert (pd.read_sql_query("SELECT CUSTOMER_PIN FROM CUSTOMER_CREDENTIAL_DATABANK WHERE CUSTOMER_USERNAME='{}'".format(username), conn)['CUSTOMER_PIN'][0]) == pin
+        dbconn = DBConnections()
+        conn = dbconn.connect_to_sql_server()
 
-            conn.close()
+        acc_no = pd.read_sql_query("SELECT CUSTOMER_ACC_NO FROM CUSTOMER_CREDENTIAL_DATABANK WHERE CUSTOMER_USERNAME='{}'".format(username), conn)['CUSTOMER_ACC_NO'][0]
+        #assert (pd.read_sql_query("SELECT CUSTOMER_PIN FROM CUSTOMER_CREDENTIAL_DATABANK WHERE CUSTOMER_USERNAME='{}'".format(username), conn)['CUSTOMER_PIN'][0]) == pin
+        if(pd.read_sql_query("SELECT CUSTOMER_PIN FROM CUSTOMER_CREDENTIAL_DATABANK WHERE CUSTOMER_USERNAME='{}'".format(username), conn)['CUSTOMER_PIN'][0] != pin):
+            return False
 
-            return acc_no
+        conn.close()
 
-        except AssertionError:
-            raise InvalidPINException("Inavlid PIN Entered")
+        return acc_no
+
+
+
+
 
     def validateCustomerPassword(self,username,password):
 
@@ -54,8 +57,7 @@ class CommonFunctions:
 
         dbconn = DBConnections()
         conn = dbconn.connect_to_sql_server()
-        print("SELECT CUSTOMER_BALANCE FROM CUSTOMER_ACCOUNT WHERE CUSTOMER_ACC_NO='{}'".format(acc_no))
-        print(pd.read_sql_query("SELECT CUSTOMER_BALANCE FROM CUSTOMER_ACCOUNT WHERE CUSTOMER_ACC_NO='{}'".format(acc_no), conn)['CUSTOMER_BALANCE'][0])
+
 
         balance =  pd.read_sql_query("SELECT CUSTOMER_BALANCE FROM CUSTOMER_ACCOUNT WHERE CUSTOMER_ACC_NO='{}'".format(acc_no), conn)['CUSTOMER_BALANCE'][0]
 

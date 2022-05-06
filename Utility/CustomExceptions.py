@@ -1,5 +1,5 @@
 
 
-class InvalidPINException():
+class InvalidPINException(AssertionError):
     pass
 
